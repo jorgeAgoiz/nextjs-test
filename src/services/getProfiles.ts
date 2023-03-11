@@ -1,7 +1,13 @@
+import { ENDPOINT_URL } from "@/config/constants";
 import { Response } from "@/types/profile";
 
-export const getProfiles = (): Promise<Response> => {
-  return fetch("https://randomuser.me/api/?results=50").then((result) =>
-    result.json()
+interface Args {
+  amount?: number;
+  seed: string;
+}
+
+export const getProfiles = ({ amount = 50, seed }: Args): Promise<Response> => {
+  return fetch(`${ENDPOINT_URL}?results=${amount}&seed=${seed}`).then(
+    (result) => result.json()
   );
 };
