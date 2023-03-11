@@ -1,4 +1,4 @@
-interface Login {
+export interface Login {
   uuid: string;
   username: string;
   password: string;
@@ -8,13 +8,13 @@ interface Login {
   sha256: string;
 }
 
-interface Picture {
+export interface Picture {
   large: string;
   medium: string;
   thumbnail: string;
 }
 
-interface Location {
+export interface Location {
   street: {
     number: number;
     name: string;
@@ -33,13 +33,15 @@ interface Location {
   };
 }
 
+export interface Name {
+  title: string;
+  first: string;
+  last: string;
+}
+
 export interface Profile {
   gender: "male" | "female";
-  name: {
-    title: string;
-    first: string;
-    last: string;
-  };
+  name: Name;
   location: Location;
   email: string;
   login: Login;
