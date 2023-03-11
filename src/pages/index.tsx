@@ -1,37 +1,33 @@
-import Layout from "@/components/Layout";
-import { getProfiles } from "@/services/getProfiles";
+import CustomLink from "@/components/custom-link";
+import Layout from "@/components/layout";
 import styles from "@/styles/Home.module.css";
-import { Profile } from "@/types/profile";
 import Head from "next/head";
-import Link from "next/link";
 
-interface Props {
-  profiles: Array<Profile>;
-}
-
-const Home = ({ profiles }: Props): JSX.Element => {
+const Home = (): JSX.Element => {
   return (
     <>
       <Head>
-        <title>Bkool - Profiles List</title>
-        <meta name="description" content="List of profiles" />
+        <title>Bkool - Home Page</title>
+        <meta name="description" content="Home Page" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/logo-yellow.png" />
       </Head>
       <Layout>
         <main className={styles.main}>
-          <section className={styles.section}>
-            <h1>Profiles List</h1>
-            {profiles.map((profile) => (
-              <>
-                <h1 key={profile.email}>{profile.name.first}</h1>
-                <Link
-                  href={`profile/${profile.name.first.replaceAll(" ", "-")}`}
-                >
-                  {profile.email}
-                </Link>
-              </>
-            ))}
+          <section className={styles.section} aria-labelledby="home-title">
+            <h1 id="home-title">Choose an option</h1>
+            <div className={styles.container} role="region">
+              <CustomLink
+                url="/profiles"
+                text="Full Profiles List"
+                title="Go to full profiles list page"
+              />
+              <CustomLink
+                url="/searcher"
+                text="Advanced Searcher"
+                title="Go to advanced searcher page"
+              />
+            </div>
           </section>
         </main>
       </Layout>
@@ -40,14 +36,3 @@ const Home = ({ profiles }: Props): JSX.Element => {
 };
 
 export default Home;
-
-export const getStaticProps = async () => {
-  const data = await getProfiles();
-
-  return {
-    props: {
-      profiles: data.results,
-    },
-    revalidate: 1,
-  };
-};
