@@ -1,38 +1,143 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Bkool prueba técnica
 
-## Getting Started
+## Tecnologías 🚀
 
-First, run the development server:
+- **NextJs**
+  - https://nextjs.org/
+- **TypeScript**
+  - https://www.typescriptlang.org/
+- **Classnames**
+  - https://github.com/JedWatson/classnames
+- **Playwright**
+  - https://playwright.dev/
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+## Descripción :scroll:
+
+Buscador de perfiles básico, con los siguientes requisitos:
+- Uso de API con datos ficticios: https://randomuser.me/api/?results=50
+- El proyecto debe estar dockerizado.
+- Al acceder a los detalles de un perfil debemos navegar a otra página.
+- En el listado se mostrará en cada UI Card:
+  - Foto de perfil
+  - Nombre
+  - Ciudad
+
+## Estructura del proyecto :file_folder:
+
+```
+./src           # Directorio raíz
+    /components # Componentes reutilizables
+    /config     # Archivos de configuración
+    /hooks      # Custom hooks
+    /pages      # Rutas de nuestra aplicación
+    /services   # Llamadas a servicios
+    /styles     # Estilos de rutas
+    /types      # Tipos e interfaces
+    /utils      # Funciones helpers
+./test          # Directorio de tests E2E
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Instalación & Despliegue 🔧
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+El archivo de variables de entorno se encuentra subido en el mismo respositorio.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Para la instalación y el despliegue en local:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```
+git clone https://github.com/jorgeAgoiz/nextjs-test
+cd nextjs-test
+npm install || npm ci
+npm run dev
+```
 
-## Learn More
+## Testing ⚙️⌨️
 
-To learn more about Next.js, take a look at the following resources:
+Para ejecutar los __test E2E__:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+npm run test:e2e
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Para visualizar los reportes generados de los __test E2E__:
 
-## Deploy on Vercel
+```
+npm run test:e2e:report
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Se verifica:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Renderizado de la home.
+- Renderizado del listado de perfiles.
+- Renderizado de la página de detalles de un perfil.
+
+## Build 📦
+
+Para realizar la **build** del proyecto:
+
+```
+npm run build
+```
+
+Para probar la build del proyecto en local:
+
+```
+npm start
+```
+
+##### Para Dockerizar proyecto:
+
+1. Crear la imagen Docker del proyecto:
+```
+docker build -t nextjs-docker .
+```
+
+2. Levantar el contenedor Docker:
+```
+docker run -p 3000:3000 nextjs-docker
+```
+
+## Wiki 📖
+
+## Comentarios acerca de la prueba :memo:
+
+Con respecto a la API proporcionada para la extracción de datos fake, me han surgido varias dificultades:
+
+- Hay que adjuntarle el param __"seed"__, junto con un string que nos identifique para obtener una consistencia en los datos entregados. Ya que de lo contrario nos entregara cada vez 50 usuarios diferentes.
+- He intentado hacer uso de los métodos __"getStaticProps"__ y __"getStaticPaths"__ para la generación estática de las rutas en el acceso a los detalles de cada perfil. Pero a la hora de hacer la __"build"__, al recibir las 50 llamadas de golpe, acababa devolviendo en la mitad un ["Status Code 503"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503) y eso impedía que el proceso de __"build"__ se completara correctamente.
+
+Adjunto capturas:
+
+
+Debido a esto he tenido que realizar la generación de las rutas en __"SSR"__. Igualmente adjunto el fragmento de código que habría facilitado la generación de rutas estáticas:
+
+
+
+Por otro lado, comentar algúnas de las decisiones que se han tomado:
+
+- He añadido un archivo de variables de entorno adjuntado al repositorio y a su vez se han añadido al __Dockerfile__. En principio nombrando el archivo ".env.local" como ".env", no habría hecho falta adjuntarlas en el __Dockerfile__, pero me parece mejor práctica setearle las variables al docker dinámicamente.
+
+- He usado para el __naming__ de archivos y carpetas la convención __"kebab-case"__, ya que me he encontrado en algun proyecto con problemas en las importaciones. Debido a que Windows si es __"case-sensitive"__ y MacOS no lo es.
+
+- He usado TypeScript para la elaboración de la prueba, ya que creo que aporta tanto más seguridad en el código, como una generación de documentación pásiva que es muy beneficiosa para los equipos.
+
+- He añadido el paquete __"classnames"__ al proyecto, ya que creo que junto con los __"CSS Modules"__ y la filosfía __BEM__, aporta muchas ventajas a la hora de construir las clases a través del paso de __"Props"__.
+
+- He añadido una suite con tres tests E2E básicos para testear las tres rutas que tienen la aplicación.
+
+- Los estilos correspondientes a los archivos de la carpeta __"/pages"__, he preferido colocarlos en una carpeta separada de la misma, llamada __"styles"__. En ella se encuentra además el archivo de estilos globales CSS. Se pueden colocar dentro la misma carpeta si renombramos los archivos de las rutas con la nomenclatura __index.page.tsx__ pero me ha parecido mas limpio separarlos ya que facilita la legibilidad y compresión.
+
+## Otros repositorios de interés :floppy_disk:
+
+Añado algunos repositorios recientes que pueden ser de interes:
+- https://github.com/jorgeAgoiz/backend_f1
+- https://github.com/jorgeAgoiz/new-blog
+
+## Autor ✒️
+
+##### Jorge Agoiz Pedraja
+
+- Github:
+  https://github.com/jorgeAgoiz
+- Linkedin:
+  https://www.linkedin.com/in/jorge-agoiz-pedraja-78321b39/
