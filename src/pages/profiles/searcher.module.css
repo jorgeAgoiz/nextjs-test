@@ -1,5 +1,5 @@
 .main {
-  background-color: white;
+  background-color: var(--color-white);
   width: 100vw;
   min-height: 90vh;
   padding-bottom: 7rem;

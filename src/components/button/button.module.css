@@ -7,7 +7,7 @@
   border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
   border-style: solid;
   border-width: 2px;
-  box-shadow: rgba(0, 0, 0, 0.2) 15px 28px 25px -18px;
+  box-shadow: var(--color-shadow-secondary) 15px 28px 25px -18px;
   box-sizing: border-box;
   cursor: pointer;
   display: inline-block;
@@ -28,20 +28,20 @@
 }
 
 .button:hover {
-  box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 8px -5px;
+  box-shadow: var(--color-shadow-secondary) 2px 8px 8px -5px;
   transform: translate3d(0, 2px, 0);
 }
 
 .button:focus {
-  box-shadow: rgba(0, 0, 0, 0.3) 2px 8px 4px -6px;
+  box-shadow: var(--color-shadow-secondary) 2px 8px 4px -6px;
 }
 
 .button--secondary {
-  background-color: #4e4605;
-  color: white;
+  background-color: var(--color-link-underline);
+  color: var(--color-white);
 }
 
 .button--primary {
-  background-color: #defffb;
-  color: black;
+  background-color: var(--color-button-primary);
+  color: var(--color-black);
 }

@@ -8,41 +8,27 @@
   gap: 0.3rem;
   padding: 1rem;
   border-radius: 0.8rem;
-  border: 1px solid black;
+  border: 1px solid var(--color-black);
   transition: 0.3s all ease-in-out;
-  background: rgb(255, 252, 210);
+  background: var(--color-background-cards);
   background: linear-gradient(
     135deg,
-    rgba(255, 252, 210, 1) 0%,
-    rgba(255, 255, 255, 1) 100%
+    var(--color-background-cards) 0%,
+    var(--color-white) 100%
   );
 }
 
 .article:hover {
   transform: scale(1.1);
-  background-color: rgb(214, 237, 255);
-  border: 3px solid black;
+  background: var(--color-button-primary);
+  border: 3px solid var(--color-black);
 }
 
 .a {
   text-decoration: none;
 }
 
-.heading {
-  color: black;
-  font-size: 1.6rem;
-  text-align: center;
-  font-family: Sono;
-}
-
-.paragraph {
-  color: rgb(91, 80, 3);
-  font-size: 1.2rem;
-  text-align: center;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
 .image {
   border-radius: 0.8rem;
-  border: 2px solid rgb(91, 80, 3);
+  border: 2px solid var(--color-link-underline);
 }

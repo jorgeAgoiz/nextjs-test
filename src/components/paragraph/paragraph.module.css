@@ -1,0 +1,23 @@
+.paragraph {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 1.1rem;
+}
+
+.paragraph--default {
+  color: var(--color-black);
+}
+.paragraph--success {
+  color: var(--color-green);
+}
+.paragraph--info {
+  color: var(--color-blue);
+}
+.paragraph--error {
+  color: var(--color-red);
+}
+
+@media screen and (max-width: 580px) {
+  .paragraph {
+    font-size: 0.9rem;
+  }
+}
