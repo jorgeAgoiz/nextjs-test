@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import styles from "./ProfileCard.module.css";
+import styles from "./profile-card.module.css";
 
 interface Props {
   picture: string;
@@ -15,8 +15,10 @@ const ProfileCard = ({ picture, name, city }: Props): JSX.Element => {
       className={styles.a}
       title={name}
     >
-      <article className={styles.article}>
-        <h1 className={styles.heading}>{name}</h1>
+      <article className={styles.article} aria-labelledby={`profile-${name}`}>
+        <h1 id={`profile-${name}`} className={styles.heading}>
+          {name}
+        </h1>
         <p className={styles.paragraph}>{city}</p>
         <Image
           src={picture}

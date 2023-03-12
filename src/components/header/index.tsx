@@ -1,9 +1,15 @@
-import styles from "@/components/header/Header.module.css";
+import CustomLink from "../custom-link";
+import styles from "./header.module.css";
 
 const Header = (): JSX.Element => {
   return (
     <header className={styles.header}>
-      <h1>Bkool - Profiler Finder</h1>
+      <CustomLink text="Home" url="/" title="Go to Home Page" />
+      <CustomLink
+        text="Searcher Profile"
+        url="/profiles"
+        title="Go to Searcher Profile"
+      />
     </header>
   );
 };

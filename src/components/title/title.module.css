@@ -1,0 +1,17 @@
+.heading {
+  font-size: 2.4rem;
+  text-align: center;
+  font-family: Sono;
+}
+
+.heading--info {
+  color: rgb(42, 96, 247);
+}
+
+.heading--success {
+  color: rgb(22, 172, 8);
+}
+
+.heading--error {
+  color: rgb(220, 64, 50);
+}

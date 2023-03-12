@@ -1,7 +1,7 @@
-import CustomLink from "@/components/custom-link";
 import Layout from "@/components/layout";
-import styles from "@/styles/Home.module.css";
+import Title from "@/components/title";
 import Head from "next/head";
+import styles from "../styles/home.module.css";
 
 const Home = (): JSX.Element => {
   return (
@@ -15,19 +15,7 @@ const Home = (): JSX.Element => {
       <Layout>
         <main className={styles.main}>
           <section className={styles.section} aria-labelledby="home-title">
-            <h1 id="home-title">Choose an option</h1>
-            <div className={styles.container} role="region">
-              <CustomLink
-                url="/profiles"
-                text="Full Profiles List"
-                title="Go to full profiles list page"
-              />
-              <CustomLink
-                url="/searcher"
-                text="Advanced Searcher"
-                title="Go to advanced searcher page"
-              />
-            </div>
+            <Title text="Skill Test - Bkool" variant="info" />
           </section>
         </main>
       </Layout>
