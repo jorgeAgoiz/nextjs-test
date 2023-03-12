@@ -108,10 +108,13 @@ Con respecto a la API proporcionada para la extracción de datos fake, me han su
 
 Adjunto capturas:
 
+![Captura de pantalla 2023-03-12 200036](https://user-images.githubusercontent.com/66563811/224578033-2137098f-7cdd-4b90-9620-1304eea49b6e.png)
+![Captura de pantalla 2023-03-12 200243](https://user-images.githubusercontent.com/66563811/224578061-ac35bdf1-1450-45e7-b738-459ba06a3b22.png)
+![Captura de pantalla 2023-03-12 200300](https://user-images.githubusercontent.com/66563811/224578088-676417cb-dd54-4b26-b914-dfdade7e3863.png)
 
 Debido a esto he tenido que realizar la generación de las rutas en __"SSR"__. Igualmente adjunto el fragmento de código que habría facilitado la generación de rutas estáticas:
 
-
+![carbon](https://user-images.githubusercontent.com/66563811/224578103-b69d07db-f924-4bce-a0ba-8ee08d725d91.png)
 
 Por otro lado, comentar algúnas de las decisiones que se han tomado:
 
