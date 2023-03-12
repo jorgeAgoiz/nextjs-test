@@ -1,6 +1,7 @@
 .paragraph {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 1.1rem;
+  text-align: center;
 }
 
 .paragraph--default {
