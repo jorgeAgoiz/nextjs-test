@@ -2,62 +2,35 @@ import Button from "@/components/button";
 import Input from "@/components/input";
 import Layout from "@/components/layout";
 import List from "@/components/list";
+import Spinner from "@/components/spinner";
 import Title from "@/components/title";
-import { ENDPOINT_SEED } from "@/config/constants";
+import { COMPANY_NAME, ENDPOINT_SEED } from "@/config/constants";
+import useSearchBar from "@/hooks/useSearchBar";
 import { getProfiles } from "@/services/getProfiles";
 import { Profile } from "@/types/profile";
-import { filterProfiles } from "@/utils/filterProfiles";
 import Head from "next/head";
-import { ChangeEvent, FormEvent, useState } from "react";
 import styles from "./searcher.module.css";
 
-interface State {
-  filteredData: Array<Profile>;
-  keyword: string;
-  message: string;
-}
 interface Props {
   profiles: Array<Profile>;
 }
 
 const Searcher = ({ profiles }: Props): JSX.Element => {
-  const [filteredData, setFilteredData] = useState<State["filteredData"]>([]);
-  const [keyword, setKeyword] = useState<State["keyword"]>("");
-  const [message, setMessage] = useState<State["message"]>("");
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>): void => {
-    const value: string = event.target.value;
-    setKeyword(value);
-  };
-
-  const handleReset = (): void => {
-    if (filteredData.length > 0) {
-      setFilteredData([]);
-    }
-    setKeyword("");
-  };
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
-    event.preventDefault();
-    setMessage("");
-    const result = filterProfiles({
-      profiles,
-      keyword,
-    });
-    if (result.length <= 0 && keyword.length > 0) {
-      setFilteredData([]);
-      setMessage("No matches found...");
-      return;
-    }
-    setFilteredData(result);
-    setKeyword("");
-  };
+  const {
+    handleChange,
+    handleReset,
+    handleSubmit,
+    loading,
+    message,
+    keyword,
+    filteredData,
+  } = useSearchBar({ profiles });
 
   return (
     <>
       <Head>
-        <title>Profile Searcher - Bkool</title>
-        <meta name="description" content="Advanced Profile Finder" />
+        <title>Profile Search Engine - {COMPANY_NAME}</title>
+        <meta name="description" content="Advanced profile search engine" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/logo-yellow.png" />
       </Head>
@@ -73,7 +46,11 @@ const Searcher = ({ profiles }: Props): JSX.Element => {
                 onChange={handleChange}
                 value={keyword}
               />
-              <div className={styles.buttons__container}>
+              <div
+                className={styles.buttons__container}
+                role="region"
+                aria-label="Form action buttons"
+              >
                 <Button type="submit" text="Search" variant="primary" />
                 <Button
                   type="button"
@@ -87,9 +64,11 @@ const Searcher = ({ profiles }: Props): JSX.Element => {
           </section>
           <section className={styles.section} aria-labelledby="list-title">
             <Title id="list-title" text="Profiles List" variant="info" />
-            {filteredData.length <= 0 ? (
+            {loading && <Spinner />}
+            {filteredData.length <= 0 && !loading && (
               <List elements={profiles} />
-            ) : (
+            )}
+            {filteredData.length > 0 && !loading && (
               <List elements={filteredData} />
             )}
           </section>

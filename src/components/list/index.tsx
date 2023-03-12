@@ -8,7 +8,11 @@ interface Props {
 
 const List = ({ elements }: Props): JSX.Element => {
   return (
-    <div className={styles.list__container} role="region">
+    <div
+      className={styles.list__container}
+      role="region"
+      aria-label="List of profiles"
+    >
       {elements?.length > 0 &&
         elements.map((profile) => (
           <ProfileCard

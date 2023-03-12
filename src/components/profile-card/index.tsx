@@ -14,11 +14,11 @@ const ProfileCard = ({ picture, name, city }: Props): JSX.Element => {
   return (
     <Link
       href={`profiles/${name.replaceAll(" ", "-")}`}
-      className={styles.a}
+      className={styles.link}
       title={name}
     >
       <article className={styles.article} aria-labelledby={`profile-${name}`}>
-        <Title text={name} variant="subtitle" />
+        <Title id={`profile-${name}`} text={name} variant="subtitle" />
         <Paragraph text={city} variant="default" />
         <Image
           src={picture}

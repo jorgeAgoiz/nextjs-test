@@ -10,6 +10,7 @@ interface Props {
   onChange?: (event: ChangeEvent<HTMLInputElement>) => void;
   value?: string | number;
   variant?: "small" | "large";
+  mandatory?: boolean;
 }
 
 const Input = ({
@@ -19,6 +20,7 @@ const Input = ({
   onChange,
   value,
   variant = "large",
+  mandatory = true,
 }: Props): JSX.Element => {
   const className: string = cx({
     input: true,
@@ -35,6 +37,7 @@ const Input = ({
       title={placeholder}
       onChange={onChange}
       value={value}
+      required={mandatory}
     />
   );
 };

@@ -9,7 +9,7 @@ interface Props {
 }
 
 const Title = ({ text, id, variant }: Props): JSX.Element => {
-  const className = cx({
+  const className: string = cx({
     heading: true,
     ["heading--success"]: variant === "success",
     ["heading--info"]: variant === "info",

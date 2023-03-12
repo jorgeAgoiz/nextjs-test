@@ -23,8 +23,8 @@ const ProfileDetailsCard = ({
   cell,
 }: Props): JSX.Element => {
   return (
-    <section className={styles.container}>
-      <Title text="Profile Details" variant="success" />
+    <section className={styles.container} aria-labelledby="title-details">
+      <Title id="title-details" text="Profile Details" variant="success" />
       <article className={styles.basic}>
         <Image
           src={picture}

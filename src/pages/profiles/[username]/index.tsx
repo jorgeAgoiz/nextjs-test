@@ -1,7 +1,7 @@
 import Button from "@/components/button";
 import Layout from "@/components/layout";
 import ProfileDetailsCard from "@/components/profile-details-card";
-import { ENDPOINT_SEED } from "@/config/constants";
+import { COMPANY_NAME, ENDPOINT_SEED } from "@/config/constants";
 import { getProfiles } from "@/services/getProfiles";
 import { Profile, Response } from "@/types/profile";
 import { addressParser } from "@/utils/addressParser";
@@ -22,7 +22,7 @@ const ProfileDetails = ({ profile }: Props): JSX.Element => {
   return (
     <>
       <Head>
-        <title>Profile Details - Bkool</title>
+        <title>Profile Details - {COMPANY_NAME}</title>
         <meta
           name="description"
           content={`Information about ${profile.name.first} profile`}

@@ -8,7 +8,7 @@ interface Props {
 }
 
 const Paragraph = ({ text, variant = "default" }: Props): JSX.Element => {
-  const className = cx({
+  const className: string = cx({
     paragraph: true,
     ["paragraph--default"]: variant === "default",
     ["paragraph--success"]: variant === "success",
