@@ -45,10 +45,12 @@ const Searcher = ({ profiles }: Props): JSX.Element => {
       keyword,
     });
     if (result.length <= 0 && keyword.length > 0) {
+      setFilteredData([]);
       setMessage("No matches found...");
       return;
     }
     setFilteredData(result);
+    setKeyword("");
   };
 
   return (

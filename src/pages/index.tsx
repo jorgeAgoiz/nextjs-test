@@ -1,7 +1,7 @@
 import Layout from "@/components/layout";
 import Title from "@/components/title";
 import Head from "next/head";
-import styles from "../styles/home.module.css";
+import styles from "./home.module.css";
 
 const Home = (): JSX.Element => {
   return (

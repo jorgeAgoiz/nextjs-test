@@ -1,5 +1,6 @@
+import Button from "@/components/button";
 import Layout from "@/components/layout";
-import Title from "@/components/title";
+import ProfileDetailsCard from "@/components/profile-details-card";
 import { ENDPOINT_SEED } from "@/config/constants";
 import { getProfiles } from "@/services/getProfiles";
 import { Profile, Response } from "@/types/profile";
@@ -7,7 +8,7 @@ import { addressParser } from "@/utils/addressParser";
 import { fullnameParser } from "@/utils/fullnameParser";
 import { Params } from "next/dist/shared/lib/router/utils/route-matcher";
 import Head from "next/head";
-import Image from "next/image";
+import { NextRouter, useRouter } from "next/router";
 import styles from "./profile-details.module.css";
 
 interface Props {
@@ -15,6 +16,9 @@ interface Props {
 }
 
 const ProfileDetails = ({ profile }: Props): JSX.Element => {
+  const router: NextRouter = useRouter();
+  const { street, postcode, city, country } = profile.location;
+
   return (
     <>
       <Head>
@@ -28,44 +32,27 @@ const ProfileDetails = ({ profile }: Props): JSX.Element => {
       </Head>
       <Layout>
         <main className={styles.main}>
-          <article className={styles.article}>
-            <Title text="Profile Details" variant="info" />
-            <section className={styles.basic}>
-              <Image
-                src={profile.picture.large}
-                alt={profile.name.first}
-                width={120}
-                height={120}
-                className={styles.image}
-                priority
-              />
-              <h2>{fullnameParser(profile.name)}</h2>
-            </section>
-            <section className={styles.location}>
-              <Title text="Location Information" variant="info" />
-              <div className={styles.location__data} role="region">
-                <h2>
-                  {addressParser({
-                    name: profile.location.street.name,
-                    number: profile.location.street.number,
-                    postCode: profile.location.postcode,
-                    city: profile.location.city,
-                    country: profile.location.country,
-                  })}
-                </h2>
-              </div>
-              <div className={styles.location__data} role="region">
-                <h2>{profile.location.timezone.description}</h2>
-              </div>
-            </section>
-            <section className={styles.contact}>
-              <Title text="Contact Information" variant="info" />
-              <div className={styles.contact__data} role="region">
-                <h2>Email: {profile.email}</h2>
-                <h2>Telephone number: {profile.phone ?? profile.cell}</h2>
-              </div>
-            </section>
-          </article>
+          <ProfileDetailsCard
+            picture={profile.picture.large}
+            fullName={fullnameParser(profile.name)}
+            fullAdress={addressParser({
+              name: street.name,
+              number: street.number,
+              postCode: postcode,
+              city: city,
+              country: country,
+            })}
+            locationDescription={profile.location.timezone.description}
+            email={profile.email}
+            phone={profile.phone}
+            cell={profile.cell}
+          />
+          <Button
+            text="Go back"
+            type="button"
+            variant="secondary"
+            handleClick={() => router.push("/profiles")}
+          />
         </main>
       </Layout>
     </>

@@ -1,10 +1,11 @@
 import Image from "next/image";
+import Paragraph from "../paragraph";
 import styles from "./footer.module.css";
 
 const Footer = (): JSX.Element => {
   return (
     <footer className={styles.footer}>
-      <h1 className={styles.heading}>Made with</h1>
+      <Paragraph text="Made with" variant="default" />
       <Image
         src="/icons/heart.svg"
         width={32}
@@ -13,7 +14,7 @@ const Footer = (): JSX.Element => {
         title="Love"
         className={styles.icon}
       />
-      <h1 className={styles.heading}>by Jorge Agoiz</h1>
+      <Paragraph text="by Jorge Agoiz" variant="default" />
     </footer>
   );
 };
