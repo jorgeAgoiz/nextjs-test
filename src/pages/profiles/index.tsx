@@ -7,9 +7,9 @@ import Title from "@/components/title";
 import { COMPANY_NAME, ENDPOINT_SEED } from "@/config/constants";
 import useSearchBar from "@/hooks/useSearchBar";
 import { getProfiles } from "@/services/getProfiles";
+import styles from "@/styles/profiles-page.module.css";
 import { Profile } from "@/types/profile";
 import Head from "next/head";
-import styles from "./searcher.module.css";
 
 interface Props {
   profiles: Array<Profile>;
@@ -29,7 +29,7 @@ const Searcher = ({ profiles }: Props): JSX.Element => {
   return (
     <>
       <Head>
-        <title>Profile Search Engine - {COMPANY_NAME}</title>
+        <title>{`Profile Search Engine - ${COMPANY_NAME}`}</title>
         <meta name="description" content="Advanced profile search engine" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/logo-yellow.png" />
@@ -85,7 +85,6 @@ export const getStaticProps = async () => {
     props: {
       profiles: data.results,
     },
-    revalidate: 1,
   };
 };
 

@@ -1,14 +1,14 @@
 import Layout from "@/components/layout";
 import Title from "@/components/title";
 import { COMPANY_NAME } from "@/config/constants";
+import styles from "@/styles/home-page.module.css";
 import Head from "next/head";
-import styles from "./home.module.css";
 
 const Home = (): JSX.Element => {
   return (
     <>
       <Head>
-        <title>Home Page - {COMPANY_NAME}</title>
+        <title>{`Home Page - ${COMPANY_NAME}`}</title>
         <meta
           name="description"
           content={`Home Page of ${COMPANY_NAME} Skill Test`}
