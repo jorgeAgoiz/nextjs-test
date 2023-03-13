@@ -131,6 +131,8 @@ Por otro lado, comentar algúnas de las decisiones que se han tomado:
 
 - Los estilos correspondientes a los archivos de la carpeta __"/pages"__, he preferido colocarlos en una carpeta separada de la misma, llamada __"styles"__. En ella se encuentra además el archivo de estilos globales CSS. Se pueden colocar dentro la misma carpeta __"/pages"__ si renombramos los archivos de las rutas con la nomenclatura __index.page.tsx__ , pero me ha parecido mas limpio separarlos ya que facilita la legibilidad y compresión.
 
+- Cuando se trata de interfaces o tipos no exportables que corresponden específicamente a una función o componente ( Props, argumentos o estados.), me gusta colocarlos encima para facilitar la lectura del código.
+
 ## Otros repositorios de interés :floppy_disk:
 
 Añado algunos repositorios recientes que pueden ser de interes:
