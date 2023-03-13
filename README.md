@@ -104,7 +104,8 @@ docker run -p 3000:3000 nextjs-docker
 Con respecto a la API proporcionada para la extracción de datos fake, me han surgido varias dificultades:
 
 - Hay que adjuntarle el param __"seed"__, junto con un string que nos identifique para obtener una consistencia en los datos entregados. Ya que de lo contrario nos entregara cada vez 50 usuarios diferentes.
-- He intentado hacer uso de los métodos __"getStaticProps"__ y __"getStaticPaths"__ para la generación estática de las rutas en el acceso a los detalles de cada perfil. Pero a la hora de hacer la __"build"__, al recibir las 50 llamadas de golpe, acababa devolviendo en la mitad un ["Status Code 503"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503) y eso impedía que el proceso de __"build"__ se completara correctamente.
+- No tiene un __endpoint__ para pedir los usuarios por ID, y poder obtener solo un usuario específico.
+- He intentado hacer uso de los métodos __"getStaticProps"__ y __"getStaticPaths"__ para la generación estática de las rutas en el acceso a los detalles de cada perfil. Pero a la hora de hacer la __"build"__, al recibir las 50 llamadas de golpe, acababa devolviendo en mas de la mitad un ["Status Code 503"](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/503) y eso impedía que el proceso de __"build"__ se completara correctamente.
 
 Adjunto capturas:
 
@@ -118,7 +119,7 @@ Debido a esto he tenido que realizar la generación de las rutas en __"SSR"__. I
 
 Por otro lado, comentar algúnas de las decisiones que se han tomado:
 
-- He añadido un archivo de variables de entorno adjuntado al repositorio y a su vez se han añadido al __Dockerfile__. En principio nombrando el archivo ".env.local" como ".env", no habría hecho falta adjuntarlas en el __Dockerfile__, pero me parece mejor práctica setearle las variables al docker dinámicamente.
+- He añadido un archivo de variables de entorno adjuntado en el repositorio y a su vez esas mismas variables se han añadido al __Dockerfile__. En principio nombrando el archivo ".env.local" como ".env", no habría hecho falta adjuntarlas en el __Dockerfile__, pero me parece mejor práctica setearle las variables al docker.
 
 - He usado para el __naming__ de archivos y carpetas la convención __"kebab-case"__, ya que me he encontrado en algun proyecto con problemas en las importaciones. Debido a que Windows si es __"case-sensitive"__ y MacOS no lo es.
 
@@ -128,7 +129,7 @@ Por otro lado, comentar algúnas de las decisiones que se han tomado:
 
 - He añadido una suite con tres tests E2E básicos para testear las tres rutas que tienen la aplicación.
 
-- Los estilos correspondientes a los archivos de la carpeta __"/pages"__, he preferido colocarlos en una carpeta separada de la misma, llamada __"styles"__. En ella se encuentra además el archivo de estilos globales CSS. Se pueden colocar dentro la misma carpeta si renombramos los archivos de las rutas con la nomenclatura __index.page.tsx__ pero me ha parecido mas limpio separarlos ya que facilita la legibilidad y compresión.
+- Los estilos correspondientes a los archivos de la carpeta __"/pages"__, he preferido colocarlos en una carpeta separada de la misma, llamada __"styles"__. En ella se encuentra además el archivo de estilos globales CSS. Se pueden colocar dentro la misma carpeta __"/pages"__ si renombramos los archivos de las rutas con la nomenclatura __index.page.tsx__ , pero me ha parecido mas limpio separarlos ya que facilita la legibilidad y compresión.
 
 ## Otros repositorios de interés :floppy_disk:
 
