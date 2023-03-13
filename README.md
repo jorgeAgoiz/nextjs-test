@@ -97,8 +97,6 @@ docker build -t nextjs-docker .
 docker run -p 3000:3000 nextjs-docker
 ```
 
-## Wiki 📖
-
 ## Comentarios acerca de la prueba :memo:
 
 Con respecto a la API proporcionada para la extracción de datos fake, me han surgido varias dificultades:
